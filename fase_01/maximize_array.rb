@@ -1,40 +1,26 @@
-=begin
+#Entrada arr = [] {-2, 0, 5, -1, 2}, K = 4
+#saída: 10
+#Explicação:
 
-Given an array of size n and a number k. We must modify array K a number of times. 
-Here modify array means in each operation we can replace any array 
-element arr[i] by -arr[i]. We need to perform this operation in such a way 
-that after K operations, the sum of the array must be maximum?
+#1. Substitua (-2) por -(-2), a matriz se torna {2, 0, 5, -1, 2}
+#2. Substitua (-1) por -(-1), a matriz se torna {2, 0, 5, 1, 2}
+#3. Substitua (0) por -(0), a matriz se torna {2, 0, 5, 1, 2}
+#4. Substitua (0) por -(0), a matriz se torna {2, 0, 5, 1, 2}
 
-Dado um array de tamanho n e um número k. Devemos modificar a matriz K várias vezes.
-Aqui modificar array significa que em cada operação podemos substituir qualquer array
-elemento arr[i] por -arr[i]. Precisamos realizar esta operação de tal maneira
-que após K operações, a soma do array deve ser máxima?
+# Exercicio prático: arr[] = {9, 8, 8, 5}, k = 3
 
+#primeiro vamos ordenar o array
+def max_soma (array, k)
 
-link:https://www.geeksforgeeks.org/maximize-array-sum-after-k-negations-using-sorting/
-=end
+  n = k
 
-module Maximize
-  class MaximumSum
-    attr_reader :array
-    attr_accessor :number
-
-    def initialize(array, number)
-      @array = array.split(",").map(&:to_i)
-      @number = number
-    end
-
-    def maximize_sum
-      sum = 0
-      number.times do
-        position = array.min
-        index = array.index(position)
-        array[index] = -array[index]
-      end
-      array.length.times do |i|
-        sum += array[i]
-      end
-      "The maximum sum is: #{sum}"
-    end
+  while n > 0 
+    array[array.index(array.min)] *= -1
+    n -= 1
   end
+  return array.sum
 end
+
+array = [9, 8, 8, 5]
+k = 3
+puts max_soma(array, k)
